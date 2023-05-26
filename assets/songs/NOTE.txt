@@ -1,0 +1,7 @@
+Songs have seperated vocals in this engine!
+to use this feature, name files accordingly:
+Inst- Instrumental
+PVoices - Player Vocals
+OVoices - Opponent Voices
+
+Alternatively, you can just name the combined vocals PVoices and not put any opponent track at all. however, there are a few bugs that come with this, so be warned!
