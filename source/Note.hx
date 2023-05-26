@@ -41,6 +41,7 @@ class Note extends FlxSprite
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
+	public var isSustainEnd:Bool = false;
 	public var noteType(default, set):String = null;
 
 	public var eventName:String = '';
@@ -88,6 +89,7 @@ class Note extends FlxSprite
 
 	public var texture(default, set):String = null;
 
+	public var vibrato:Bool = false;
 	public var noAnimation:Bool = false;
 	public var noMissAnimation:Bool = false;
 	public var hitCausesMiss:Bool = false;
@@ -147,6 +149,8 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 				case 'Alt Animation':
 					animSuffix = '-alt';
+				case 'Vibrato':
+					vibrato = true;
 				case 'No Animation':
 					noAnimation = true;
 					noMissAnimation = true;
@@ -171,6 +175,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+		isSustainEnd = false;
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -208,6 +213,7 @@ class Note extends FlxSprite
 			offsetX += width / 2;
 			copyAngle = false;
 
+			isSustainEnd = true;
 			animation.play(colArray[noteData % 4] + 'holdend');
 
 			updateHitbox();
@@ -219,6 +225,7 @@ class Note extends FlxSprite
 
 			if (prevNote.isSustainNote)
 			{
+				prevNote.isSustainEnd = false;
 				prevNote.animation.play(colArray[prevNote.noteData % 4] + 'hold');
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
@@ -241,6 +248,7 @@ class Note extends FlxSprite
 			}
 		} else if(!isSustainNote) {
 			earlyHitMult = 1;
+			isSustainEnd = true;
 		}
 		x += offsetX;
 	}

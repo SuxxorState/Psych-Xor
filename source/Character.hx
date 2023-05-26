@@ -337,9 +337,9 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
+	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0, special:Bool = false):Void
 	{
-		specialAnim = false;
+		specialAnim = special;
 		animation.play(AnimName, Force, Reversed, Frame);
 
 		var daOffset = animOffsets.get(AnimName);
@@ -368,6 +368,17 @@ class Character extends FlxSprite
 		}
 	}
 	
+	public function pauseAnim() {
+		if (!loopExists())
+			animation.pause();
+		else
+			animation.curAnim.curFrame = animation.frames - 1;
+	}
+
+	public function loopExists():Bool {
+		return animation.getByName(animation.curAnim.name + '-loop') != null;
+	}
+		
 	function loadMappedAnims():Void
 	{
 		var noteData:Array<SwagSection> = Song.loadFromJson('picospeaker', Paths.formatToSongPath(PlayState.SONG.song)).notes;

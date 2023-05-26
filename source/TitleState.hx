@@ -127,7 +127,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		super.create();
 
-		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+		FlxG.save.bind('funkin' #if (flixel < "5.0.0"), 'SuxxorState' #end);
 
 		ClientPrefs.loadPrefs();
 

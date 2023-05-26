@@ -109,7 +109,7 @@ class Paths
 		}
 		// flags everything to be cleared out next unused memory clear
 		localTrackedAssets = [];
-		#if !html5 openfl.Assets.cache.clear("songs"); #end
+		openfl.Assets.cache.clear("songs");
 	}
 
 	static public var currentModDirectory:String = '';
@@ -218,26 +218,25 @@ class Paths
 		return file;
 	}
 
-	inline static public function voices(song:String):Any
+	inline static public function pVoices(song:String):Any
 	{
-		#if html5
-		return 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
-		#else
-		var songKey:String = '${formatToSongPath(song)}/Voices';
+		var songKey:String = '${formatToSongPath(song)}/PVoices';
 		var voices = returnSound('songs', songKey);
 		return voices;
-		#end
+	}
+
+	inline static public function oVoices(song:String):Any
+	{
+		var songKey:String = '${formatToSongPath(song)}/OVoices';
+		var voices = returnSound('songs', songKey);
+		return voices;
 	}
 
 	inline static public function inst(song:String):Any
 	{
-		#if html5
-		return 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
-		#else
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
 		return inst;
-		#end
 	}
 
 	inline static public function image(key:String, ?library:String):FlxGraphic
@@ -367,7 +366,7 @@ class Paths
 			localTrackedAssets.push(path);
 			return currentTrackedAssets.get(path);
 		}
-		trace('oh no its returning null NOOOO');
+		trace('oh no ' + key + (library == null ? ('') : (' in library ' + library)) + ' is returning null NOOOO');
 		return null;
 	}
 
