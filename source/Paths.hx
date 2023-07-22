@@ -57,7 +57,6 @@ class Paths
 
 	public static var dumpExclusions:Array<String> =
 	[
-		'assets/music/freakyMenu.$SOUND_EXT',
 		'assets/shared/music/breakfast.$SOUND_EXT',
 		'assets/shared/music/tea-time.$SOUND_EXT',
 	];
@@ -128,7 +127,7 @@ class Paths
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = getLibraryPathForce(file, currentLevel);
+				levelPath = getLibraryPathForce(file, 'stage_assets', currentLevel);
 				if (OpenFlAssets.exists(levelPath, type))
 					return levelPath;
 			}
@@ -146,9 +145,10 @@ class Paths
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
 
-	inline static function getLibraryPathForce(file:String, library:String)
+	inline static function getLibraryPathForce(file:String, library:String, ?level:String)
 	{
-		var returnPath = '$library:assets/$library/$file';
+		if(level == null) level = library;
+		var returnPath = '$library:assets/$level/$file';
 		return returnPath;
 	}
 
@@ -218,18 +218,18 @@ class Paths
 		return file;
 	}
 
-	inline static public function pVoices(song:String):Any
+	inline static public function pVoices(song:String, isSelectable:Bool = false):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/PVoices';
-		var voices = returnSound('songs', songKey);
-		return voices;
+		var pvoices = returnSound('songs', songKey);
+		return pvoices;
 	}
 
 	inline static public function oVoices(song:String):Any
 	{
 		var songKey:String = '${formatToSongPath(song)}/OVoices';
-		var voices = returnSound('songs', songKey);
-		return voices;
+		var ovoices = returnSound('songs', songKey);
+		return ovoices;
 	}
 
 	inline static public function inst(song:String):Any
@@ -261,7 +261,7 @@ class Paths
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = getLibraryPathForce(key, currentLevel);
+				levelPath = getLibraryPathForce(key, 'stage_assets', currentLevel);
 				if (FileSystem.exists(levelPath))
 					return File.getContent(levelPath);
 			}
