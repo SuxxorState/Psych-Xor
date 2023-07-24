@@ -276,6 +276,7 @@ class Note extends FlxSprite
 		{
 			centerOffsets();
 			centerOrigin();
+			isSustainEnd = true;
 		}
 		x += offsetX;
 	}

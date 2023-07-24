@@ -416,10 +416,15 @@ class FunkinLua {
 
 			FlxG.sound.music.pause();
 			FlxG.sound.music.volume = 0;
-			if(game.vocals != null)
+			if(game.pvocals != null)
 			{
-				game.vocals.pause();
-				game.vocals.volume = 0;
+				game.pvocals.pause();
+				game.pvocals.volume = 0;
+			}
+			if(game.ovocals != null)
+			{
+				game.ovocals.pause();
+				game.ovocals.volume = 0;
 			}
 			FlxG.camera.followLerp = 0;
 		});

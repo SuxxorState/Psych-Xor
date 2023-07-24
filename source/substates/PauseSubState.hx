@@ -248,7 +248,8 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;
 				case 'Options':
 					PlayState.instance.paused = true; // For lua
-					PlayState.instance.vocals.volume = 0;
+					PlayState.instance.pvocals.volume = 0;
+					PlayState.instance.ovocals.volume = 0;
 					MusicBeatState.switchState(new OptionsState());
 					if(ClientPrefs.data.pauseMusic != 'None')
 					{

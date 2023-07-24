@@ -21,7 +21,8 @@ class CustomSubstate extends MusicBeatSubstate
 				game.paused = true;
 				if(FlxG.sound.music != null) {
 					FlxG.sound.music.pause();
-					game.vocals.pause();
+					game.pvocals.pause();
+					game.ovocals.pause();
 				}
 			}
 			game.openSubState(new CustomSubstate(name));

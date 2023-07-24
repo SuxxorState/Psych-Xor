@@ -31,6 +31,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'ghostTapping',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Directional Camera', //Name
+			'If checked, the screen slightly pans to the note hit.', //Description
+			'dynamicCam', //Save data variable name
+			'bool'); //Variable type
+		addOption(option);
 		
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",

@@ -161,7 +161,8 @@ class MainMenuState extends MusicBeatState
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * elapsed;
-			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
+			if(FreeplayState.pvocals != null) FreeplayState.pvocals.volume += 0.5 * elapsed;
+			if(FreeplayState.ovocals != null) FreeplayState.ovocals.volume += 0.5 * elapsed;
 		}
 		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 / (FlxG.updateFramerate / 60), 0, 1);
 
