@@ -299,9 +299,9 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0, special:Bool = false):Void
+	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
-		specialAnim = special;
+		specialAnim = false;
 		animation.play(AnimName, Force, Reversed, Frame);
 
 		var daOffset = animOffsets.get(AnimName);
@@ -329,7 +329,11 @@ class Character extends FlxSprite
 			}
 		}
 	}
-		
+	
+	public function pauseAnim() {
+		animation.pause();
+		animation.curAnim.curFrame = 0;
+	}
 	
 	function loadMappedAnims():Void
 	{

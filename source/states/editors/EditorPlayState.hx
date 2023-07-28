@@ -224,7 +224,7 @@ class EditorPlayState extends MusicBeatSubstate
 		if (FlxG.sound.music.time >= -ClientPrefs.data.noteOffset)
 		{
 			if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
-				|| (PlayState.SONG.needsVoices && Math.abs(pvocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate) && Math.abs(ovocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)))
+				|| (PlayState.SONG.needsVoices && (Math.abs(pvocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate) || Math.abs(ovocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate))))
 			{
 				resyncVocals();
 			}
@@ -306,16 +306,16 @@ class EditorPlayState extends MusicBeatSubstate
 		Conductor.changeBPM(songData.bpm);
 
 		pvocals = new FlxSound();
-		if (songData.needsVoices) pvocals.loadEmbedded(Paths.pVoices(songData.song));
-		pvocals.volume = 0;
-		
 		ovocals = new FlxSound();
-		if (songData.needsVoices) ovocals.loadEmbedded(Paths.oVoices(songData.song));
+		if (songData.needsVoices) {
+			pvocals.loadEmbedded(Paths.voices(songData.song));
+			ovocals.loadEmbedded(Paths.voices(songData.song));
+		}
+		pvocals.volume = 0;
 		ovocals.volume = 0;
 
 		pvocals.pitch = playbackRate;
 		ovocals.pitch = playbackRate;
-
 		FlxG.sound.list.add(pvocals);
 		FlxG.sound.list.add(ovocals);
 
@@ -477,6 +477,7 @@ class EditorPlayState extends MusicBeatSubstate
 		pvocals.destroy();
 		ovocals.pause();
 		ovocals.destroy();
+
 		if(finishTimer != null)
 		{
 			finishTimer.cancel();
@@ -872,7 +873,7 @@ class EditorPlayState extends MusicBeatSubstate
 		if(finishTimer != null) return;
 
 		pvocals.pause();
-		pvocals.pause();
+		ovocals.pause();
 
 		FlxG.sound.music.play();
 		FlxG.sound.music.pitch = playbackRate;

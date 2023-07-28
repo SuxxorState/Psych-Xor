@@ -65,8 +65,10 @@ class LoadingState extends MusicBeatState
 				var introComplete = callbacks.add("introComplete");
 				if (PlayState.SONG != null) {
 					checkLoadSong(getSongPath());
-					if (PlayState.SONG.needsVoices)
-						checkLoadSong(getVocalPath());
+					if (PlayState.SONG.needsVoices) {
+						checkLoadSong(getPVocalPath());
+						checkLoadSong(getOVocalPath());
+					}
 				}
 				checkLibrary("shared");
 				if(directory != null && directory.length > 0 && directory != 'shared') {
@@ -138,9 +140,14 @@ class LoadingState extends MusicBeatState
 		return Paths.inst(PlayState.SONG.song);
 	}
 	
-	static function getVocalPath()
+	static function getPVocalPath()
 	{
-		return Paths.voices(PlayState.SONG.song);
+		return Paths.oVoices(PlayState.SONG.song);
+	}
+		
+	static function getOVocalPath()
+	{
+		return Paths.pVoices(PlayState.SONG.song);
 	}
 	
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)

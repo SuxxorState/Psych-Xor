@@ -48,10 +48,10 @@
     {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": "2.5.1"
+      "version": null
     },
     {
-      "name": "hscript",
+      "name": "SScript",
       "type": "haxelib",
       "version": null
     },

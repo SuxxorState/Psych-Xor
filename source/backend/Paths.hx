@@ -219,7 +219,8 @@ class Paths
 		return voices;
 		#end
 	}
-	
+
+		
 	inline static public function pVoices(song:String, isSelectable:Bool = false):Any
 	{
 		#if html5
@@ -300,7 +301,7 @@ class Paths
 			return newGraphic;
 		}
 
-		trace('oh no ' + key + (library == null ? ('') : (' in library ' + library)) + ' is returning null NOOOO');
+		trace('oh no its returning null NOOOO ($file)');
 		return null;
 	}
 

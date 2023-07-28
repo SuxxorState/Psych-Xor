@@ -31,7 +31,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'ghostTapping',
 			'bool');
 		addOption(option);
-
+		
 		var option:Option = new Option('Directional Camera', //Name
 			'If checked, the screen slightly pans to the note hit.', //Description
 			'dynamicCam', //Save data variable name
