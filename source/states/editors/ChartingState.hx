@@ -826,7 +826,7 @@ class ChartingState extends MusicBeatState
 		check_changeBPM.checked = _song.notes[curSec].changeBPM;
 		check_changeBPM.name = 'check_changeBPM';
 
-		stepperSectionBPM = new FlxUINumericStepper(10, check_changeBPM.y + 20, 1, Conductor.bpm, 0, 999, 1);
+		stepperSectionBPM = new FlxUINumericStepper(check_duetSection.x, check_changeBPM.y + 20, 1, Conductor.bpm, 0, 999, 1);
 		if(check_changeBPM.checked) {
 			stepperSectionBPM.value = _song.notes[curSec].bpm;
 		} else {

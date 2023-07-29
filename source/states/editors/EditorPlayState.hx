@@ -308,8 +308,8 @@ class EditorPlayState extends MusicBeatSubstate
 		pvocals = new FlxSound();
 		ovocals = new FlxSound();
 		if (songData.needsVoices) {
-			pvocals.loadEmbedded(Paths.voices(songData.song));
-			ovocals.loadEmbedded(Paths.voices(songData.song));
+			pvocals.loadEmbedded(Paths.pVoices(songData.song));
+			ovocals.loadEmbedded(Paths.oVoices(songData.song));
 		}
 		pvocals.volume = 0;
 		ovocals.volume = 0;
